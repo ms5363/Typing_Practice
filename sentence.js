@@ -11,6 +11,9 @@ const mainDiv = document.querySelector('.main_container');
 
 const hiddenInput = document.querySelector('.hiddenInput');
 
+let upperChar = document.querySelectorAll('.upperChar');
+let lowerChar = document.querySelectorAll('.lowerChar');
+
 
 
 navs.forEach((nav) => nav.addEventListener('mouseenter', (e) => {
@@ -57,16 +60,15 @@ function navBackground(e, enter=false) {
 window.onload = init();
 let text;
 let allSentences;
-let maxChar = 120;
 let maxRow = 3;
-let maxCharInRow = 40;
+let maxCharInRow =60;
 let typeIndex = 0;
 let wordWrapStartIndex = 0;
 let wordWrapEndIndex;
 
 
 function init() {
-    fetch('./Lorem_Ipsum.txt').then((response) => response.text())
+    fetch('./article.txt').then((response) => response.text())
         .then((data) => data.replace(/\r\n/gi, '\n'))
         .then((data) => text = data)
         .then((data) => allSentences = data.split(''))
@@ -80,10 +82,6 @@ function main() {
     //     max = Math.floor(max);
     //     return Math.floor(Math.random() * (max - min)) + min;
     // }
-
-    // let sentence = allSentences.slice(typeIndex, typeIndex + maxChar);
-    // let rowCount = Math.trunc(sentence.length/maxCharInRow)
-
 
 
 
@@ -117,37 +115,43 @@ function main() {
 
 
     // wordWrap index를 확인해서 main_container에 한줄한줄 display.
-    for (var r = 0; r < maxRow; r++) {
+    function displaySentences() {
+        mainDiv.innerHTML = null;
 
-        wordWrapEndIndex = wordWrap();
-        console.log(wordWrapEndIndex)
+        for (var r = 0; r < maxRow; r++) {
 
-        let upperRow = document.createElement('div');
-        let lowerRow = document.createElement('div');
-        
-        upperRow.classList.add('upperRow', 'textRow');
-        lowerRow.classList.add('lowerRow', 'textRow');
-        mainDiv.appendChild(upperRow);
-        mainDiv.appendChild(lowerRow);
+            wordWrapEndIndex = wordWrap();
 
-        let rowLength = wordWrapEndIndex - wordWrapStartIndex;
+            let upperRow = document.createElement('div');
+            let lowerRow = document.createElement('div');
+            
+            upperRow.classList.add('upperRow', 'textRow');
+            lowerRow.classList.add('lowerRow', 'textRow');
+            mainDiv.appendChild(upperRow);
+            mainDiv.appendChild(lowerRow);
 
-        let sentence = allSentences.slice(wordWrapStartIndex, wordWrapEndIndex);
+            let rowLength = wordWrapEndIndex - wordWrapStartIndex;
 
-        for (var i = 0; i < rowLength; i++) {
-            let upperChar = document.createElement('span');
-            let lowerChar = document.createElement('span');
-            upperChar.classList.add('upperChar');
-            lowerChar.classList.add('lowerChar');
-            if (sentence[i] == '\n') sentence[i] = '⏎'; 
-            upperChar.textContent = sentence[i];
-            lowerChar.textContent = ' ';
-            upperRow.appendChild(upperChar);
-            lowerRow.appendChild(lowerChar);
+            let sentence = allSentences.slice(wordWrapStartIndex, wordWrapEndIndex);
+
+            for (var i = 0; i < rowLength; i++) {
+                let upperChar = document.createElement('span');
+                let lowerChar = document.createElement('span');
+                upperChar.classList.add('upperChar');
+                lowerChar.classList.add('lowerChar');
+                if (sentence[i] == '\n') sentence[i] = '⏎'; 
+                upperChar.textContent = sentence[i];
+                lowerChar.textContent = ' ';
+                upperRow.appendChild(upperChar);
+                lowerRow.appendChild(lowerChar);
+            }
+            wordWrapStartIndex = wordWrapEndIndex;
         }
-        wordWrapStartIndex = wordWrapEndIndex;
+
+        upperChar = document.querySelectorAll('.upperChar');
+        lowerChar = document.querySelectorAll('.lowerChar');
     }
-    
+    displaySentences();
 
 
 
@@ -155,8 +159,7 @@ function main() {
 
     let currentCursorIndex = 0;
     let toTypeChar;
-    const upperChar = document.querySelectorAll('.upperChar');
-    const lowerChar = document.querySelectorAll('.lowerChar');
+
 
     hiddenInput.addEventListener('input', (e) => keyInput(e));
     hiddenInput.addEventListener('keydown', (e) => keyDown(e));
@@ -168,35 +171,40 @@ function main() {
 
     function keyDown(e) {
         if (e.keyCode === 8) {
-            console.log('back')
             if (currentCursorIndex === 0) return;
             currentCursorIndex--;
             lowerChar[currentCursorIndex].classList.remove('passed');
+            lowerChar[currentCursorIndex].classList.remove('equal');
             lowerChar[currentCursorIndex].textContent = null;
-        }
+        } else if (e.keyCode === 13) {
+            typeCompare('⏎');
+        } else return;
     }
     
     
     function keyInput(e) {
-
-        console.log(e.keyCode);
-
-        if (upperChar[currentCursorIndex].textContent === '⏎') {
-            toTypeChar = '\n';
+        typeCompare(e.target.value);
+        e.target.value = null;
+        if (currentCursorIndex === lowerChar.length) {
+            displaySentences();
+            currentCursorIndex = 0;
         }
-        else toTypeChar = upperChar[currentCursorIndex].textContent;
-        console.log(e.target.value);
+    }
 
-        if(e.target.value === toTypeChar.charCodeAt(0)) {
-            console.log('key')
-        }
+    function typeCompare(inputChar) {
+        toTypeChar = upperChar[currentCursorIndex].textContent
 
         lowerChar[currentCursorIndex].classList.add('passed');
-        lowerChar[currentCursorIndex].textContent = e.target.value;
-        currentCursorIndex++;
+        lowerChar[currentCursorIndex].textContent = inputChar;
 
-        e.target.value = null;
+        if (toTypeChar === inputChar) {
+            lowerChar[currentCursorIndex].classList.add('equal')
+        }
+
+        currentCursorIndex++;
     }
+
+
 
 
 }

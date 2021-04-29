@@ -149,7 +149,7 @@ nav>div {
 
 .main_container {
     margin: auto;
-    width: 1120px;
+    width: 1080px;
 }
 
 .main .textRow {
@@ -161,13 +161,22 @@ nav>div {
     margin: 5px 0 20px 0;
 }
 
+.main .lowerRow span {
+    background-color: rgb(76, 76, 78);
+}
+
+
 .main .lowerRow .passed {
-    background-color: green;
+    background-color: rgb(107, 48, 48);
+}
+
+.main .lowerRow .equal {
+    background-color: rgb(81, 116, 81);
 }
 
 .hiddenInput {
     /* visibility:hidden; */
-    height:10px;
+    height:0px;
     border: none;
     outline: none;
 }
@@ -175,9 +184,10 @@ nav>div {
 .main_container span {
     font-family: Consolas;
     font-size: 1.8rem;
-    border:1px solid white;
-    width: 16px;
-    padding: 5px 5px 5px 5px;
+    /* border:1px solid white; */
+    border: none;
+    width: 12px;
+    padding: 5px 3px 5px 3px;
     height: 28px;
     display: inline-flex;
     text-align: center;
