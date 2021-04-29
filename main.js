@@ -95,15 +95,6 @@ function main() {
             }
         }
     }
-
-    // function matchWords() {
-    //     wordInput = textInputDiv.value;
-    //     if (matchstart === wordToType){
-    //         start();
-    //     }
-    // }
-
-    // let matchstart = setInterval(matchWords, 100);
     start();
 
 }

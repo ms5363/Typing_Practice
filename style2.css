@@ -131,20 +131,65 @@ nav>div {
 
 
 .wrapper {
-    min-width: 800px;
-    width: 52%;
+    min-width: 1200px;
+    width: 60%;
     margin:0 auto 0 auto;
-    padding: 100px 0 0 0;
+    padding: 30px 0 0 0;
     /* background-color:rgb(64, 65, 66); */
 }
 
 .main {    
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
     color:white;
-    padding-bottom: 100px;
+    padding-bottom: 25px;
+    /* flex-basis: 40px; */
 }
 
+
+.main_container {
+    margin: auto;
+    width: 1120px;
+}
+
+.main .textRow {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.main .lowerRow {
+    margin: 5px 0 20px 0;
+}
+
+.main .lowerRow .passed {
+    background-color: green;
+}
+
+.hiddenInput {
+    /* visibility:hidden; */
+    height:10px;
+    border: none;
+    outline: none;
+}
+
+.main_container span {
+    font-family: Consolas;
+    font-size: 1.8rem;
+    border:1px solid white;
+    width: 16px;
+    padding: 5px 5px 5px 5px;
+    height: 28px;
+    display: inline-flex;
+    text-align: center;
+    vertical-align: top;
+    /* flex-grow:0; */
+    
+    /* flex:1; */
+}
+
+
+
+/* 
 
 .wrapper h2 {
     word-wrap: break-word;
@@ -170,6 +215,9 @@ nav>div {
     letter-spacing: 0.1rem;
     background-color:rgb(204, 204, 204)
 }
+
+ */
+
 
 .sub {
     display: flex;
