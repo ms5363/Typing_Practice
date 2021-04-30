@@ -321,6 +321,7 @@ function main() {
     function startTimeCheck() {
         if (!startTimeForData) {
             startTimeForData = Date.now()
+            data_description.textContent = 'Monitoring Typing Speed...'
             
             setTimeoutForData = setTimeout(() => {
                 timeForData += Date.now() - startTimeForData;
