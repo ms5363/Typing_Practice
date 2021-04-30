@@ -87,7 +87,7 @@ let wordWrapStartIndex = -1;
 let wordWrapEndIndex = 0;
 
 let allWordWrapIndex = [0];
-let allPageIndex = 0;
+let maxPage = 1;
 let pageIndex = {page:0};
 let pageIndexProxy;
 let currentCursorIndex = 0;
@@ -154,7 +154,7 @@ function main() {
             value = Math.floor(value);
             if (target[key] == value) return;
             if (value < 1) value = 1
-            else if (allPageIndex.length < value) value = allPageIndex.length;
+            else if (maxPage < value) value = maxPage;
             else target[key] = value;
             pageChanged(value);
             displaySentences(value);
@@ -168,9 +168,8 @@ function main() {
         wordWrapEndIndex = wordWrap();
         allWordWrapIndex.push(wordWrapEndIndex);
     }
-    allPageIndex = [...Array(Math.ceil(allWordWrapIndex.length / maxRow)).keys()];
-    allPageIndex.splice(0,1);
-    pageRange.max = allPageIndex.length;
+    maxPage = Math.ceil(allWordWrapIndex.length / maxRow) - 1;
+    pageRange.max = maxPage;
 
     if (localStorage.page) pageIndexProxy.page = localStorage.page
     else pageIndexProxy.page = 1;
@@ -178,7 +177,7 @@ function main() {
 
     // page change area
     function pageChanged(newPage) {
-        pageSpan.textContent = `${newPage}/${allPageIndex.length}`;
+        pageSpan.textContent = `${newPage}/${maxPage}`;
         pageRange.value = newPage;
     }
 
@@ -273,6 +272,7 @@ function main() {
 
     function keyDown(e) {
         startTimeCheck();
+        console.log(e.keyCode);
         if (e.keyCode === 8) {
             if (currentCursorIndex === 0) return;
             currentCursorIndex--;
@@ -331,7 +331,6 @@ function main() {
         } 
         
         else {
-            console.log('test')
             data_description.textContent = 'Monitoring Typing Speed...'
             clearTimeout(setTimeoutForData);
             
