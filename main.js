@@ -1,14 +1,10 @@
-const hrefsharp = document.querySelectorAll('a[href="#"]')
-hrefsharp.forEach((elem) => elem.addEventListener('click',(e) => e.preventDefault()));
-
-
-
+// nav bar
 const navs_a = document.querySelectorAll('.navs>a');
 const navs = document.querySelectorAll('.navs');
-const textInputDiv = document.querySelector('.textInput');
-const wordToTypeDiv = document.querySelector('.wordToTypeDiv');
-// const defaultBackgroundColor = window.getComputedStyle(document.body, null).getPropertyValue('background-color')
-const defaultBackgroundColor = window.getComputedStyle(wordToTypeDiv, null).getPropertyValue('background-color');
+const hrefsharp = document.querySelectorAll('a[href="#"]')
+
+hrefsharp.forEach((elem) => elem.addEventListener('click',(e) => e.preventDefault()));
+
 
 navs.forEach((nav) => nav.addEventListener('mouseenter', (e) => {
     e.target.classList.remove('open')
@@ -36,7 +32,6 @@ function navBackground(e, enter=false) {
     const background = e.target.querySelector('.navs_background');
     const navs_ul = e.target.querySelector('ul');
     const coords = navs_ul.getBoundingClientRect();
-    console.log(coords);
     if (enter === true) {
         background.style.setProperty('width', `${coords.width}px`);
         background.style.setProperty('height', `${coords.height}px`);
@@ -52,8 +47,16 @@ function navBackground(e, enter=false) {
 
 
 
-window.onload = init();
+
+
+const textInputDiv = document.querySelector('.textInput');
+const wordToTypeDiv = document.querySelector('.wordToTypeDiv');
+const defaultBackgroundColor = window.getComputedStyle(wordToTypeDiv, null).getPropertyValue('background-color');
 let words;
+
+
+window.onload = init();
+
 
 function init() {
     fetch('./EN_All_Words.txt').then((response) => response.text()).then((data) => words = data.split('\n')).then(() => main());

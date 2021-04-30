@@ -1,17 +1,9 @@
-const hrefsharp = document.querySelectorAll('a[href="#"]')
-hrefsharp.forEach((elem) => elem.addEventListener('click',(e) => e.preventDefault()));
-
-
+// nav bar
 const navs_a = document.querySelectorAll('.navs>a');
 const navs = document.querySelectorAll('.navs');
-const mainDiv = document.querySelector('.main_container');
-const hiddenInput = document.querySelector('.hiddenInput');
-const data_description = document.querySelector('.data_description');
-const resultDiv = document.querySelector('.result');
+const hrefsharp = document.querySelectorAll('a[href="#"]')
 
-
-let upperChar = document.querySelectorAll('.upperChar');
-let lowerChar = document.querySelectorAll('.lowerChar');
+hrefsharp.forEach((elem) => elem.addEventListener('click',(e) => e.preventDefault()));
 
 
 navs.forEach((nav) => nav.addEventListener('mouseenter', (e) => {
@@ -58,25 +50,16 @@ function navBackground(e, enter=false) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-window.onload = init();
-
+const hiddenInput = document.querySelector('.hiddenInput');
+const data_description = document.querySelector('.data_description');
+const resultDiv = document.querySelector('.result');
+const mainDiv = document.querySelector('.main_container');
 
 const pageSpan = document.querySelector('.currentPage span');
 const pageRange = document.querySelector('.currentPage input[type="range"]');
 const pageInput = document.querySelector('.toPage form');
+let upperChar = document.querySelectorAll('.upperChar');
+let lowerChar = document.querySelectorAll('.lowerChar');
 
 let text;
 let allSentences;
@@ -99,7 +82,7 @@ let setTimeoutForData;
 let checkStopTime = 2000;
 
 
-
+window.onload = init();
 
 
 function init() {
