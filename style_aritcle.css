@@ -296,15 +296,15 @@ nav>div {
 .progress {
     color: white;
     flex: 1;
-    background-color: rgb(76, 90, 76);
-    border: 1px white solid;
+    background-color: rgb(63, 66, 63);
+    /* border: 1px white solid; */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .progress>div {
-    flex: 1;
+    /* flex: 1; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -326,6 +326,10 @@ nav>div {
 
 .progress span {
     font-size: 2.5rem;
+}
+
+.progress .toPage {
+    flex: 0.9;
 }
 
 .currentPage div {

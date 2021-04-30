@@ -290,6 +290,8 @@ function main() {
         else if (controlKeypressed && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
             if (e.key === 'ArrowLeft') pageIndexProxy.page--;
             else pageIndexProxy.page++;
+            timeForData = 0;
+            startTimeForData = 0;
         } else return;
     }
     
