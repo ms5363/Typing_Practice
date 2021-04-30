@@ -6,6 +6,9 @@ const navs_a = document.querySelectorAll('.navs>a');
 const navs = document.querySelectorAll('.navs');
 const mainDiv = document.querySelector('.main_container');
 const hiddenInput = document.querySelector('.hiddenInput');
+const data_description = document.querySelector('.data_description');
+const resultDiv = document.querySelector('.result');
+
 
 let upperChar = document.querySelectorAll('.upperChar');
 let lowerChar = document.querySelectorAll('.lowerChar');
@@ -90,6 +93,10 @@ let pageIndexProxy;
 let currentCursorIndex = 0;
 
 
+let timeForData = 0;
+let startTimeForData;
+let endTimeForData;
+let setTimeoutForData;
 
 
 
@@ -211,6 +218,7 @@ function main() {
 
     // wordWrap index를 확인해서 main_container에 한줄한줄 display.
     function displaySentences() {
+        timeForData = 0;
         console.log('display');
         mainDiv.innerHTML = null;
         currentCursorIndex = 0;
@@ -252,10 +260,8 @@ function main() {
 
 
 
+
 // typing detect
-
-
-let toTypeChar;
 
 
     hiddenInput.addEventListener('input', (e) => keyInput(e));
@@ -267,6 +273,7 @@ let toTypeChar;
     });
 
     function keyDown(e) {
+        startTimeCheck();
         if (e.keyCode === 8) {
             if (currentCursorIndex === 0) return;
             currentCursorIndex--;
@@ -283,12 +290,15 @@ let toTypeChar;
         typeCompare(e.target.value);
         e.target.value = null;
         if (currentCursorIndex === lowerChar.length) {
+            endTimeCheck();
             pageIndexProxy.page++
             currentCursorIndex = 0;
         }
     }
 
     function typeCompare(inputChar) {
+        let toTypeChar;
+
         toTypeChar = upperChar[currentCursorIndex].textContent
 
         lowerChar[currentCursorIndex].classList.add('passed');
@@ -302,5 +312,64 @@ let toTypeChar;
 
 
 
+
+
+
+
+
+
+
+    function startTimeCheck() {
+        if (!startTimeForData) {
+            startTimeForData = Date.now()
+            
+            setTimeoutForData = setTimeout(() => {
+                timeForData += Date.now() - startTimeForData;
+                data_description.textContent = 'Typing Speed Monitoring Stopped';
+                startTimeForData = null;
+                console.log('if timeset')
+            }, 5000);
+        } 
+        
+        else {
+            console.log('test')
+            data_description.textContent = 'Monitoring Typing Speed...'
+            clearTimeout(setTimeoutForData);
+            
+            setTimeoutForData = setTimeout(() => {
+                timeForData += Date.now() - startTimeForData;
+                data_description.textContent = 'Monitoring Stopped';
+                console.log('else timeset')
+            }, 5000);
+        }
+    }
+    
+    function endTimeCheck() {
+        timeForData += Date.now() - startTimeForData;
+
+        var allUpperText = '';
+        var allLowerText = '';
+        var notEqual = 0;
+        var accuracy;
+        var cpm;
+        var resultDivChilds = resultDiv.childNodes;
+
+        upperChar.forEach((node) => allUpperText += node.textContent);
+        lowerChar.forEach((node) => allLowerText += node.textContent);
+
+        for (var i = 0; i < allLowerText.length; i++) {
+            if (allUpperText[i] !== allLowerText[i]) notEqual++;
+        }
+
+        accuracy = 100 * ((allLowerText.length - notEqual) / allLowerText.length);
+        cpm = 60 * (allLowerText.length / (timeForData / 1000));
+
+        resultDivChilds[0].textContent = `WPM : ${(cpm / 5).toFixed()}`;
+        resultDivChilds[1].textContent = `CPM : ${cpm.toFixed()}`;
+        resultDivChilds[2].textContent = `Accuracy : ${accuracy.toFixed(1)}%`;
+
+        startTimeForData = 0;
+        clearTimeout(setTimeoutForData);
+    }
 
 }
