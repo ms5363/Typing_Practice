@@ -55,7 +55,7 @@ const data_description = document.querySelector('.data_description');
 const resultDiv = document.querySelector('.result');
 const mainDiv = document.querySelector('.main_container');
 
-const pageSpan = document.querySelector('.currentPage span');
+const pageSpan = document.querySelector('.pageIndexDisplay');
 const pageRange = document.querySelector('.currentPage input[type="range"]');
 const pageInput = document.querySelector('.toPage form');
 let upperChar = document.querySelectorAll('.upperChar');
@@ -205,10 +205,6 @@ function main() {
 
 // sentences display
 
-
-
-
-
     // wordWrap index를 확인해서 main_container에 한줄한줄 display.
     function displaySentences() {
         console.log('display');
@@ -265,23 +261,35 @@ function main() {
 
     hiddenInput.addEventListener('input', (e) => keyInput(e));
     hiddenInput.addEventListener('keydown', (e) => keyDown(e));
+    document.addEventListener('keyup', (e) => {if (e.key === 'Control') controlKeypressed = false});
 
     mainDiv.addEventListener('click', (e) => {
         e.preventDefault();
         hiddenInput.focus()
     });
 
+    let controlKeypressed = false;
+
     function keyDown(e) {
         startTimeCheck();
         console.log(e.keyCode);
-        if (e.keyCode === 8) {
+        console.log(e.key);
+        if (e.key === 'Backspace') {
             if (currentCursorIndex === 0) return;
             currentCursorIndex--;
             lowerChar[currentCursorIndex].classList.remove('passed');
             lowerChar[currentCursorIndex].classList.remove('equal');
             lowerChar[currentCursorIndex].textContent = null;
-        } else if (e.keyCode === 13) {
+        } 
+        else if (e.key === 'Enter') {
             typeCompare('⏎');
+        }
+        else if (e.key === 'Control') {
+            controlKeypressed = true;
+        }
+        else if (controlKeypressed && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
+            if (e.key === 'ArrowLeft') pageIndexProxy.page--;
+            else pageIndexProxy.page++;
         } else return;
     }
     

@@ -142,7 +142,7 @@ nav>div {
     /* display: flex; */
     /* flex-direction: column; */
     color:white;
-    padding-bottom: 25px;
+    padding-bottom: 10px;
     /* flex-basis: 40px; */
 }
 
@@ -325,5 +325,15 @@ nav>div {
 } 
 
 .progress span {
-    font-size: 2.5rem
+    font-size: 2.5rem;
+}
+
+.currentPage div {
+    display: flex;
+    align-items: center;
+}
+
+.currentPage p {
+    font-size: 1rem;
+    margin: 15px;
 }
