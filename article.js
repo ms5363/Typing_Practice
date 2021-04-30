@@ -92,12 +92,11 @@ let pageIndex = {page:0};
 let pageIndexProxy;
 let currentCursorIndex = 0;
 
-
 let timeForData = 0;
 let startTimeForData;
 let endTimeForData;
 let setTimeoutForData;
-
+let checkStopTime = 2000;
 
 
 
@@ -327,8 +326,7 @@ function main() {
                 timeForData += Date.now() - startTimeForData;
                 data_description.textContent = 'Typing Speed Monitoring Stopped';
                 startTimeForData = null;
-                console.log('if timeset')
-            }, 5000);
+            }, checkStopTime);
         } 
         
         else {
@@ -339,8 +337,8 @@ function main() {
             setTimeoutForData = setTimeout(() => {
                 timeForData += Date.now() - startTimeForData;
                 data_description.textContent = 'Monitoring Stopped';
-                console.log('else timeset')
-            }, 5000);
+                startTimeForData = null;
+            }, checkStopTime);
         }
     }
     

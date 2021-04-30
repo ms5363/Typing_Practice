@@ -320,6 +320,10 @@ nav>div {
     height: 30px;
 }
 
+.progress input[type='range'] {
+    width: 220px;
+} 
+
 .progress span {
     font-size: 2.5rem
 }
