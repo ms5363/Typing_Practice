@@ -168,6 +168,7 @@ function main() {
         wordWrapEndIndex = wordWrap();
         allWordWrapIndex.push(wordWrapEndIndex);
     }
+
     maxPage = Math.ceil(allWordWrapIndex.length / maxRow) - 1;
     pageRange.max = maxPage;
 
@@ -175,7 +176,18 @@ function main() {
     else pageIndexProxy.page = 1;
 
 
-    // page change area
+
+
+
+
+
+
+
+
+
+
+
+// page change
     function pageChanged(newPage) {
         pageSpan.textContent = `${newPage}/${maxPage}`;
         pageRange.value = newPage;
@@ -216,7 +228,6 @@ function main() {
 
     // wordWrap index를 확인해서 main_container에 한줄한줄 display.
     function displaySentences() {
-        timeForData = 0;
         console.log('display');
         mainDiv.innerHTML = null;
         currentCursorIndex = 0;
@@ -234,7 +245,6 @@ function main() {
             mainDiv.appendChild(lowerRow);
 
             let rowLength = wordWrapEndIndex - wordWrapStartIndex;
-
             let sentence = allSentences.slice(wordWrapStartIndex, wordWrapEndIndex);
 
             for (var i = 0; i < rowLength; i++) {
@@ -259,8 +269,16 @@ function main() {
 
 
 
-// typing detect
 
+
+
+
+
+
+
+
+
+// detect typing
 
     hiddenInput.addEventListener('input', (e) => keyInput(e));
     hiddenInput.addEventListener('keydown', (e) => keyDown(e));
@@ -288,7 +306,7 @@ function main() {
     function keyInput(e) {
         typeCompare(e.target.value);
         e.target.value = null;
-        if (currentCursorIndex === lowerChar.length) {
+        if (currentCursorIndex >= lowerChar.length) {
             endTimeCheck();
             pageIndexProxy.page++
             currentCursorIndex = 0;
@@ -318,28 +336,23 @@ function main() {
 
 
 
+
+
+
+
+// time & accuracy check
+
     function startTimeCheck() {
-        if (!startTimeForData) {
-            startTimeForData = Date.now()
-            data_description.textContent = 'Monitoring Typing Speed...'
-            
-            setTimeoutForData = setTimeout(() => {
-                timeForData += Date.now() - startTimeForData;
-                data_description.textContent = 'Typing Speed Monitoring Stopped';
-                startTimeForData = null;
-            }, checkStopTime);
-        } 
+        if (!startTimeForData) startTimeForData = Date.now();
         
-        else {
-            data_description.textContent = 'Monitoring Typing Speed...'
-            clearTimeout(setTimeoutForData);
-            
-            setTimeoutForData = setTimeout(() => {
-                timeForData += Date.now() - startTimeForData;
-                data_description.textContent = 'Monitoring Stopped';
-                startTimeForData = null;
-            }, checkStopTime);
-        }
+        clearTimeout(setTimeoutForData);
+        data_description.textContent = 'Monitoring Typing Speed...';
+
+        setTimeoutForData = setTimeout(() => {
+            timeForData += Date.now() - startTimeForData;
+            data_description.textContent = 'Monitoring Stopped';
+            startTimeForData = null;
+        }, checkStopTime);
     }
     
     function endTimeCheck() {
@@ -366,6 +379,7 @@ function main() {
         resultDivChilds[1].textContent = `CPM : ${cpm.toFixed()}`;
         resultDivChilds[2].textContent = `Accuracy : ${accuracy.toFixed(1)}%`;
 
+        timeForData = 0;
         startTimeForData = 0;
         clearTimeout(setTimeoutForData);
     }
