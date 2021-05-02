@@ -86,7 +86,7 @@ window.onload = init();
 
 
 function init() {
-    fetch('./J.d. Salinger - CatcherInTheRye.txt').then((response) => response.text())
+    fetch('./article.txt').then((response) => response.text())
         .then((data) => data.replace(/\r\n/gi, '\n'))
         .then((data) => text = data)
         .then((data) => allSentences = data.split(''))
