@@ -56,4 +56,5 @@ form.addEventListener('submit', (e) => {
     console.log(e);
     console.log(inputText.value);
     localStorage.InputText = inputText.value;
+    localStorage.page_custom = 0;
 })
