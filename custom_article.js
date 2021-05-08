@@ -290,6 +290,11 @@ function main() {
         } 
         else if (e.key === 'Enter') {
             typeCompare('⏎');
+            if (currentCursorIndex >= lowerChar.length) {
+                endTimeCheck();
+                pageIndexProxy.page_custom++
+                currentCursorIndex = 0;
+            }    
         }
         else if (e.key === 'Control') {
             controlKeypressed = true;
