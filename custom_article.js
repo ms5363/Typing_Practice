@@ -214,7 +214,6 @@ function main() {
 
     // wordWrap index를 확인해서 main_container에 한줄한줄 display.
     function displaySentences() {
-        console.log('display');
         mainDiv.innerHTML = null;
         currentCursorIndex = 0;
         wordWrapStartIndex = allWordWrapIndex[(pageIndex.page_custom - 1) * maxRow];
@@ -279,8 +278,6 @@ function main() {
 
     function keyDown(e) {
         startTimeCheck();
-        console.log(e.keyCode);
-        console.log(e.key);
         if (e.key === 'Backspace') {
             if (currentCursorIndex === 0) return;
             currentCursorIndex--;
@@ -292,7 +289,7 @@ function main() {
             typeCompare('⏎');
             if (currentCursorIndex >= lowerChar.length) {
                 endTimeCheck();
-                pageIndexProxy.page_custom++
+                pageIndexProxy.page_custom++;
                 currentCursorIndex = 0;
             }    
         }
