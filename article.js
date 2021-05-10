@@ -152,10 +152,11 @@ function main() {
         allWordWrapIndex.push(wordWrapEndIndex);
     }
 
-    maxPage = Math.ceil(allWordWrapIndex.length / maxRow) - 1;
+    maxPage = Math.max(1, Math.ceil(allWordWrapIndex.length / maxRow) - 1);
     pageRange.max = maxPage;
 
-    if (localStorage.page) pageIndexProxy.page = localStorage.page
+    if (localStorage.page && localStorage.page !== '0') 
+        pageIndexProxy.page = localStorage.page;
     else pageIndexProxy.page = 1;
 
 
