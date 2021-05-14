@@ -47,9 +47,18 @@ function navBackground(e, enter=false) {
 
 
 
+
+
+
+
+
+
+
+
 const form = document.querySelector('form');
 const inputText = document.querySelector('form textarea');
 
+inputText.textContent = localStorage.InputText;
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
