@@ -162,7 +162,7 @@ function main() {
         allWordWrapIndex.push(wordWrapEndIndex);
     }
 
-    maxPage = Math.max(1, Math.ceil(allWordWrapIndex.length / maxRow) - 1);
+    maxPage = Math.max(1, Math.ceil(allWordWrapIndex.length / maxRow));
     pageRange.max = maxPage;
 
     if (localStorage.page_custom && localStorage.page_custom !== '0') 
