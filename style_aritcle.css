@@ -356,5 +356,5 @@ nav>div {
 /* 임시 */
 
 .result {
-    display: hidden;
+    visibility: hidden;
 }
