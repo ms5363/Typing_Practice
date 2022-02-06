@@ -259,7 +259,8 @@ nav>div {
     margin: 10px auto 30px auto;
     padding: 10px 10px 10px 10px;
     background-color:rgb(37, 37, 39);
-    color:white;
+    color:rgb(37, 37, 39);
+    /* color:white; */
     border-radius: 5px;
     display:flex;
     flex-direction: column;

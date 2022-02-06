@@ -66,4 +66,5 @@ form.addEventListener('submit', (e) => {
     console.log(inputText.value);
     localStorage.InputText = inputText.value;
     localStorage.page_custom = 0;
+    window.location.href = "https://ms5363.github.io/Typing_Practice/custom_article.html";
 })
