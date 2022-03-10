@@ -53,6 +53,7 @@ function navBackground(e, enter=false) {
 const hiddenInput = document.querySelector('.hiddenInput');
 const data_description = document.querySelector('.data_description');
 const resultDiv = document.querySelector('.result');
+const resultDivCover = document.querySelector(".result .result_off");
 const mainDiv = document.querySelector('.main_container');
 
 const pageSpan = document.querySelector('.pageIndexDisplay');
@@ -278,6 +279,7 @@ function main() {
     let controlKeypressed = false;
 
     function keyDown(e) {
+        console.log(e.key); 
         startTimeCheck();
         if (e.key === 'Backspace') {
             if (currentCursorIndex === 0) return;
@@ -294,15 +296,29 @@ function main() {
                 currentCursorIndex = 0;
             }    
         }
+
         else if (e.key === 'Control') {
             controlKeypressed = true;
+            console.log("ctrl");
         }
+
         else if (controlKeypressed && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
             if (e.key === 'ArrowLeft') pageIndexProxy.page_custom--;
             else pageIndexProxy.page_custom++;
             timeForData = 0;
             startTimeForData = 0;
-        } else return;
+        }
+
+        else if (controlKeypressed && (e.key === 'ArrowUp')) {
+            resultDivCover.setAttribute("style", "opacity: 0");
+        }
+        
+        else if (controlKeypressed && (e.key === 'ArrowDown')) {
+            console.log("test");
+            resultDivCover.setAttribute("style", "opacity: 1");
+        }
+        
+        else return;
     }
     
     

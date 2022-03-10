@@ -253,26 +253,53 @@ nav>div {
     background-color: rgb(130, 130, 136);
 }
 
+
+
+.result.result_on {
+    color: white;
+}
+
 .result {
     width: 300px;
     height: 100px;
     margin: 10px auto 30px auto;
     padding: 10px 10px 10px 10px;
     background-color:rgb(37, 37, 39);
-    color:rgb(37, 37, 39);
+    color:white;
     /* color:white; */
     border-radius: 5px;
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
 .result p {
-    flex:1;
-    display:table-cell;
+    flex: 1;
+    display: table-cell;
     text-align: left;
     padding: 8px;
     vertical-align: middle;
 }
+
+
+
+
+.result_off {
+    background-color:rgb(37, 37, 39);
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.result_off p {
+    flex: 1;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
 
 
 
