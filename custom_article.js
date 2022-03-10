@@ -279,7 +279,6 @@ function main() {
     let controlKeypressed = false;
 
     function keyDown(e) {
-        console.log(e.key); 
         startTimeCheck();
         if (e.key === 'Backspace') {
             if (currentCursorIndex === 0) return;
@@ -299,7 +298,6 @@ function main() {
 
         else if (e.key === 'Control') {
             controlKeypressed = true;
-            console.log("ctrl");
         }
 
         else if (controlKeypressed && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
@@ -314,7 +312,6 @@ function main() {
         }
         
         else if (controlKeypressed && (e.key === 'ArrowDown')) {
-            console.log("test");
             resultDivCover.setAttribute("style", "opacity: 1");
         }
         
@@ -382,7 +379,7 @@ function main() {
         var notEqual = 0;
         var accuracy;
         var cpm;
-        var resultDivChilds = resultDiv.childNodes;
+        var resultDivChilds = resultDiv.children;
 
         upperChar.forEach((node) => allUpperText += node.textContent);
         lowerChar.forEach((node) => allLowerText += node.textContent);
