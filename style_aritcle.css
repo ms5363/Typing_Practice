@@ -182,7 +182,7 @@ nav>div {
 }
 
 .main_container span {
-    font-family: Consolas;
+    font-family: Consolas, Arial;
     font-size: 1.8rem;
     /* border:1px solid white; */
     border: none;
