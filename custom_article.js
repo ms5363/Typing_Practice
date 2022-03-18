@@ -131,7 +131,7 @@ function main() {
 
         // text를 뒤에서부터 하나씩 검사. 최초로 ' '이 나오면 해당 index 값 return.
         for (var c = 1; c <= maxIndex; c++) {
-            if (currSentence[maxIndex-c] === ' ') {
+            if ((currSentence[maxIndex-c] === ' ') || (currSentence[maxIndex-c] === '\n')) {
                 return wordWrapStartIndex + maxIndex - c;
             }
             else {
