@@ -239,6 +239,7 @@ function main() {
                 let lowerChar = document.createElement('span');
                 upperChar.classList.add('upperChar');
                 lowerChar.classList.add('lowerChar');
+                lowerChar.classList.add('focused');
                 if (sentence[i] == '\n') sentence[i] = '⏎'; 
                 upperChar.textContent = sentence[i];
                 lowerChar.textContent = ' ';
