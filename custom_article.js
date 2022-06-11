@@ -235,16 +235,16 @@ function main() {
             let sentence = allSentences.slice(wordWrapStartIndex, wordWrapEndIndex);
 
             for (var i = 0; i < rowLength; i++) {
-                let upperChar = document.createElement('span');
-                let lowerChar = document.createElement('span');
-                upperChar.classList.add('upperChar');
-                lowerChar.classList.add('lowerChar');
-                lowerChar.classList.add('focused');
+                var upperChar_span = document.createElement('span');
+                var lowerChar_span = document.createElement('span');
+                upperChar_span.classList.add('upperChar');
+                lowerChar_span.classList.add('lowerChar');
+                lowerChar_span.classList.add('focused');
                 if (sentence[i] == '\n') sentence[i] = '⏎'; 
-                upperChar.textContent = sentence[i];
-                lowerChar.textContent = ' ';
-                upperRow.appendChild(upperChar);
-                lowerRow.appendChild(lowerChar);
+                upperChar_span.textContent = sentence[i];
+                lowerChar_span.textContent = ' ';
+                upperRow.appendChild(upperChar_span);
+                lowerRow.appendChild(lowerChar_span);
             }
             wordWrapStartIndex = wordWrapEndIndex;
             wordWrapEndIndex = allWordWrapIndex[allWordWrapIndex.indexOf(wordWrapEndIndex) + 1];
@@ -252,6 +252,7 @@ function main() {
 
         upperChar = document.querySelectorAll('.upperChar');
         lowerChar = document.querySelectorAll('.lowerChar');
+        lowerChar[0].classList.add("current");
     }
 
 
@@ -275,14 +276,14 @@ function main() {
         elem.classList.remove("focusout") 
         elem.classList.add("focused") 
         })
-    
-        console.log("test")
+        lowerChar[currentCursorIndex].classList.add("current");
     });
     hiddenInput.addEventListener('focusout', () => {lowerChar.forEach((elem, index) => {
         elem.classList.remove("focused") 
         elem.classList.add("focusout") 
-        })
-
+    })
+    
+        lowerChar[currentCursorIndex].classList.remove("current");
         console.log("test2")
     });
 
@@ -300,6 +301,8 @@ function main() {
             currentCursorIndex--;
             lowerChar[currentCursorIndex].classList.remove('passed');
             lowerChar[currentCursorIndex].classList.remove('equal');
+            lowerChar[currentCursorIndex + 1].classList.remove('current');
+            lowerChar[currentCursorIndex].classList.add('current');
             lowerChar[currentCursorIndex].textContent = null;
         } 
         else if (e.key === 'Enter') {
@@ -310,18 +313,18 @@ function main() {
                 currentCursorIndex = 0;
             }    
         }
-
+        
         else if (e.key === 'Control') {
             controlKeypressed = true;
         }
-
+        
         else if (controlKeypressed && (e.key === 'ArrowLeft' || e.key === 'ArrowRight')) {
             if (e.key === 'ArrowLeft') pageIndexProxy.page_custom--;
             else pageIndexProxy.page_custom++;
             timeForData = 0;
             startTimeForData = 0;
         }
-
+        
         else if (controlKeypressed && (e.key === 'ArrowUp')) {
             resultDivCover.setAttribute("style", "opacity: 0");
         }
@@ -341,9 +344,12 @@ function main() {
             endTimeCheck();
             pageIndexProxy.page_custom++
             currentCursorIndex = 0;
+            return
         }
+        lowerChar[currentCursorIndex].classList.add('current');
+        lowerChar[currentCursorIndex - 1].classList.remove('current');
     }
-
+    
     function typeCompare(inputChar) {
         let toTypeChar;
 

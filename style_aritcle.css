@@ -178,6 +178,17 @@ nav>div {
     background-color: rgb(81, 116, 81);
 }
 
+.main .lowerRow .current {
+    animation: cursor-blink 0.7s steps(2) infinite;
+    background-color: rgb(111, 116, 161);
+}
+
+@keyframes cursor-blink{
+    0% {
+        opacity: 0.4;
+    }
+}
+
 .hiddenInput {
     /* visibility:hidden; */
     height:0px;
