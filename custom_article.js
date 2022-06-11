@@ -270,6 +270,20 @@ function main() {
     hiddenInput.addEventListener('input', (e) => keyInput(e));
     hiddenInput.addEventListener('keydown', (e) => keyDown(e));
     document.addEventListener('keyup', (e) => {if (e.key === 'Control') controlKeypressed = false});
+    hiddenInput.addEventListener('focus', () => {lowerChar.forEach((elem, index) => {
+        elem.classList.remove("focusout") 
+        elem.classList.add("focused") 
+        })
+    
+        console.log("test")
+    });
+    hiddenInput.addEventListener('focusout', () => {lowerChar.forEach((elem, index) => {
+        elem.classList.remove("focused") 
+        elem.classList.add("focusout") 
+        })
+
+        console.log("test2")
+    });
 
     mainDiv.addEventListener('click', (e) => {
         e.preventDefault();

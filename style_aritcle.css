@@ -161,8 +161,12 @@ nav>div {
     margin: 5px 0 20px 0;
 }
 
-.main .lowerRow span {
-    background-color: rgb(76, 76, 78);
+.main .lowerRow .focusout {
+    background-color: rgb(66, 66, 68);
+}
+
+.main .lowerRow .focused {
+    background-color: rgb(76, 76, 76);
 }
 
 
