@@ -307,6 +307,8 @@ function main() {
         } 
         else if (e.key === 'Enter') {
             typeCompare('⏎');
+            lowerChar[currentCursorIndex].classList.add('current');
+            lowerChar[currentCursorIndex - 1].classList.remove('current');
             if (currentCursorIndex >= lowerChar.length) {
                 endTimeCheck();
                 pageIndexProxy.page_custom++;
