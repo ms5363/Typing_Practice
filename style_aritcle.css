@@ -179,7 +179,7 @@ nav>div {
 }
 
 .main .lowerRow .current {
-    animation: cursor-blink 0.7s steps(2) infinite;
+    animation: cursor-blink 1.06s steps(2) infinite;
     background-color: rgb(111, 116, 161);
 }
 
