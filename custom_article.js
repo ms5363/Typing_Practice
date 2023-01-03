@@ -83,6 +83,7 @@ let setTimeoutForData;
 let checkStopTime = 2000;
 
 
+
 window.onload = init();
 
 
@@ -297,6 +298,7 @@ function main() {
     function keyDown(e) {
         startTimeCheck();
         if (e.key === 'Backspace') {
+            typing_sound();
             if (currentCursorIndex === 0) return;
             currentCursorIndex--;
             lowerChar[currentCursorIndex].classList.remove('passed');
@@ -306,6 +308,7 @@ function main() {
             lowerChar[currentCursorIndex].textContent = null;
         } 
         else if (e.key === 'Enter') {
+            typing_sound();
             typeCompare('⏎');
             
             if (currentCursorIndex >= lowerChar.length) {
@@ -344,6 +347,7 @@ function main() {
     
     
     function keyInput(e) {
+        typing_sound();
         typeCompare(e.target.value);
         e.target.value = null;
         if (currentCursorIndex >= lowerChar.length) {
@@ -425,6 +429,13 @@ function main() {
         timeForData = 0;
         startTimeForData = 0;
         clearTimeout(setTimeoutForData);
+    }
+
+
+
+    function typing_sound() {
+        var typing_sound = new Audio("typewriter.mp3")
+        typing_sound.play();
     }
 
 }
