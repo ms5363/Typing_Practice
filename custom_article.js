@@ -434,8 +434,8 @@ function main() {
 
 
     function typing_sound() {
-        var typing_sound = new Audio("typewriter.mp3")
-        typing_sound.play();
+        // var typing_sound = new Audio("typewriter.mp3")
+        // typing_sound.play();
     }
 
 }
